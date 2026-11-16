@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GeoCities Reborn 👻 — The dead web lives again</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="stars" aria-hidden="true"></div>
+<header class="hero">
+  <div class="badges"><span class="badge blink">UNDER CONSTRUCTION</span><span class="badge">EST. 1994 — REBORN 2026</span><span class="badge">100% HANDMADE HTML</span></div>
+  <h1><span class="ghost">👻</span> GeoCities <span class="reborn">Reborn</span></h1>
+  <p class="tagline">The dead web lives again. Tell <b>Webby</b>, our ghost-agent, one sentence about yourself — and watch it build you a 1990s personal homepage, visitor counter and all.</p>
+  <p class="tiny">Built with Kiro for Kiroween 2026 · Category: Resurrection · No accounts, no tracking, no cookies. The 90s way.</p>
+</header>
+
+<main>
+  <section class="panel builder" id="builder">
+    <h2>🕸️ Build your homepage</h2>
+    <label for="prompt">One sentence about you. Who are you, and what do you love?</label>
+    <textarea id="prompt" rows="2" maxlength="300" placeholder="e.g. I'm Mimi, a cat who rules the house and worships sunbeams"></textarea>
+    <div class="examples">
+      <span>Try one:</span>
+      <button type="button" data-example="I'm Mimi, a cat who rules the house and worships sunbeams">🐱 Mimi the cat</button>
+      <button type="button" data-example="I'm DJ Nova, I mix retro synthwave and collect vinyl">🎧 DJ Nova</button>
+      <button type="button" data-example="I'm Captain Stardust, an amateur astronomer hunting UFOs">🛸 Captain Stardust</button>
+    </div>
+    <div class="themes" id="themes" role="radiogroup" aria-label="Neighborhood theme"></div>
+    <p class="tiny" id="theme-note">No theme picked? Webby chooses the neighborhood for you.</p>
+    <div class="actions">
+      <button id="build-btn" class="big">✨ Build my homepage</button>
+      <button id="regen-btn" class="ghost-btn" hidden>🎲 Surprise me (new version)</button>
+      <button id="download-btn" class="ghost-btn" hidden>💾 Download my page (.html)</button>
+    </div>
+    <p class="error" id="error" hidden></p>
+    <div class="plan" id="plan" hidden>
+      <h3>👻 Webby is building…</h3>
+      <ol id="plan-steps"></ol>
+    </div>
+  </section>
+
+  <section class="panel preview" id="preview-section">
+    <div class="browser-chrome">
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      <span class="url" id="preview-url">about:blank — your homepage will appear here</span>
+      <button id="music-btn" class="music-btn" title="Play the theme chiptune">♪</button>
+    </div>
+    <div class="empty" id="preview-empty">
+      <p class="big-emoji">🏚️</p>
+      <p>This lot is empty. Build a homepage above — or peek at a neighbor below.</p>
+    </div>
+    <iframe id="preview" title="Your generated homepage" hidden></iframe>
+  </section>
+
+  <section class="panel gallery" id="gallery">
+    <h2>🏘️ The neighborhood — sample homepages</h2>
+    <p>Every page below was built by Webby itself. Click one to move in for a look.</p>
+    <div class="cards" id="gallery-cards"><p class="tiny">Loading the neighbors…</p></div>
+  </section>
+
+  <section class="panel about">
+    <h2>🪦 What died, and what came back</h2>
+    <p>GeoCities hosted <b>38 million</b> personal homepages and shut down in 2009. The web lost its front yards: pages built by hand, by ordinary people, for no reason except joy. <b>GeoCities Reborn</b> brings them back — the tiled backgrounds, the guestbooks, the visitor counters, the under-construction signs — rebuilt by an AI agent that plans, drafts, and verifies each page like a tiny 1998 webmaster who never sleeps.</p>
+    <p>Everything runs locally, with zero dependencies. A generated page is a single HTML file: no tracking, no external images, no server needed. Download it and it works forever, offline, on any machine — the way the old web was supposed to work.</p>
+    <p class="tiny">How it was built: spec-driven with Kiro — see <code>.kiro/specs/geocities-reborn/</code> for requirements, design, and tasks, and <code>KIRO-USAGE.md</code> for every Kiro session. Kiro CLI 3.3.0 installed in the build environment.</p>
+  </section>
+</main>
+
+<footer>
+  <p>GeoCities Reborn · Kiroween 2026 · Category: Resurrection · Made with Kiro · Best viewed at 800×600 with Netscape Navigator 4.0 (or any browser from this century)</p>
+</footer>
+<script type="module" src="/js/app.js"></script>
+</body>
+</html>

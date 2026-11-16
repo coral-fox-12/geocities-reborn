@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="geocities" content="area51|Captain Stardust">
+<title>Captain Stardust's Homepage 👽 Area 51</title>
+<style>
+    body{background:#001a00;background-image:radial-gradient(circle at 20% 30%, #0f3d0f 0, transparent 12%), radial-gradient(circle at 80% 70%, #0f3d0f 0, transparent 12%);color:#7CFC00;font-family:"Comic Sans MS","Chalkboard SE","Comic Neue",cursive,sans-serif;margin:0;padding:0 12px 40px}
+    a{color:#00ff41} a:visited{color:#c0ff00}
+    h1,h2,h3{color:#00ff41;text-shadow:2px 2px 0 #000}
+    .wrap{max-width:760px;margin:0 auto}
+    .banner{text-align:center;border:3px ridge #00ff41;padding:10px;margin:14px 0;background:rgba(0,0,0,.45)}
+    .nav{text-align:center;font-weight:bold;letter-spacing:1px;margin:8px 0}
+    .nav a{margin:0 8px}
+    .box{border:3px groove #00ff41;background:rgba(0,0,0,.5);padding:12px 16px;margin:16px 0}
+    .divider{text-align:center;color:#c0ff00;letter-spacing:2px;margin:18px 0;white-space:nowrap;overflow:hidden}
+    marquee{font-size:28px;font-weight:bold;color:#00ff41}
+    ul{line-height:1.9}
+    .badge{display:inline-block;border:2px solid #c0ff00;padding:4px 10px;margin:4px;font-weight:bold;background:#000;color:#c0ff00}
+    .blink{animation:blink 1s steps(2) infinite}
+    @keyframes blink{50%{opacity:0}}
+    .ufo{animation:bob 2.4s ease-in-out infinite;display:inline-block}
+    @keyframes bob{50%{transform:translateY(-8px)}}
+    input,textarea{font-family:inherit;background:#000;color:#7CFC00;border:2px inset #00ff41;padding:6px;width:92%}
+    button{font-family:inherit;background:#00ff41;color:#000;border:3px outset #fff;padding:6px 14px;font-weight:bold;cursor:pointer}
+    .counter{font-size:26px;letter-spacing:4px;color:#c0ff00;font-family:"Courier New",monospace}
+    .counter b{background:#000;border:2px solid #c0ff00;padding:2px 6px;margin:0 1px}
+    .guest{border-bottom:1px dashed #c0ff00;padding:6px 0}
+    .sparkle{position:fixed;pointer-events:none;color:#c0ff00;font-size:14px;z-index:9999}
+    .music{position:fixed;right:10px;bottom:10px;z-index:9999}
+    .tiny{font-size:12px;text-align:center;opacity:.85}
+  </style></head>
+<body><div class="wrap">
+<div class="banner"><span class="ufo">👽</span>
+<marquee behavior="alternate" scrollamount="6">✦ CAPTAIN STARDUST'S HOMEPAGE ✦</marquee>
+<div>Greetings, Earthling! Welcome to my corner of Area 51.</div></div>
+<div class="nav"><a href="#about">ABOUT ME</a> | <a href="#faves">FAVORITES</a> | <a href="#shrine">THE UFO SHRINE</a> | <a href="#guestbook">GUESTBOOK</a></div>
+<div class="divider">🛸 ✦ ─── ✦ 🛸 ✦ ─── ✦ 🛸</div>
+<div class="box" id="about"><h2>👋 About Me</h2>
+<p>Captain Stardust here. Welcome to my little corner of the World Wide Web. Make yourself at home — the guestbook is open and the music is free.</p>
+<p>Best viewed at 800x600 with the lights low and the volume up. Netscape Navigator 4.0 recommended. Your mileage may vary.</p>
+<p>Everything on this page was made with love, a 28.8k modem, and far too much free time. Please sign the guestbook before you go.</p>
+<p><span class="badge blink">UNDER CONSTRUCTION</span> <span class="badge">EST. 1998</span> <span class="badge">100% HANDMADE HTML</span></p></div>
+<div class="box" id="faves"><h2>⭐ My Favorite Things</h2>
+<ul><li>area 51</li>
+<li>moonlight</li>
+<li>the final frontier</li>
+<li>telescopes</li>
+<li>shooting stars</li></ul></div>
+<div class="box" id="shrine"><h2>👽 The UFO Shrine</h2>
+<p>a log of UFO sightings — lovingly maintained since 1998.</p>
+<p style="font-size:34px;text-align:center;letter-spacing:8px">👽 ✦ 👽 ✦ 👽</p></div>
+<div class="divider">🛸 ✦ ─── ✦ 🛸 ✦ ─── ✦ 🛸</div>
+<div class="box" id="guestbook"><h2>📖 Sign My Guestbook</h2>
+<div id="entries"></div>
+<p><input id="gb-name" placeholder="Your name" maxlength="40"></p>
+<p><textarea id="gb-msg" rows="3" placeholder="Leave a message from the future..." maxlength="280"></textarea></p>
+<p><button id="gb-sign">✍ Sign the guestbook</button></p></div>
+<div class="box" id="webring" style="text-align:center"><h2>🕸️ The Webring</h2>
+<p>You are visitor of the <b>Area 51 Webring</b>.</p>
+<p><button data-ring="prev">⬅ Previous site</button> <button data-ring="random">🎲 Random site</button> <button data-ring="next">Next site ➡</button></p>
+<p id="ring-msg" class="tiny">Travel the ring. Every stop is another homepage, frozen in time.</p></div>
+<div class="box" style="text-align:center"><h2>👀 Visitor Counter</h2>
+<div class="counter" id="counter"></div>
+<p class="tiny">You are visitor number <span id="count-num">000001</span> since 1998.</p></div>
+<p class="tiny">Best viewed with Netscape Navigator 4.0 at 800x600 • Made with GeoCities Reborn • Area 51 • No cookies were harmed (or used) in the making of this page.</p>
+</div>
+<button class="music" id="music-btn">♪ Play the Area 51 chiptune</button>
+<script>
+(function(){
+var KEY='gc-19s491j';
+var entries=JSON.parse(localStorage.getItem(KEY+'-gb')||'[]');
+var count=parseInt(localStorage.getItem(KEY+'-n')||'0',10)+1;
+localStorage.setItem(KEY+'-n',String(count));
+document.getElementById('count-num').textContent=String(count).padStart(6,'0');
+document.getElementById('counter').innerHTML=String(count).padStart(6,'0').split('').map(function(d){return '<b>'+d+'</b>'}).join('');
+function renderGb(){
+  document.getElementById('entries').innerHTML=entries.slice(-5).reverse().map(function(e){
+    return '<div class="guest"><b>'+e.name.replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})+'</b> wrote: '+e.msg.replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})+'</div>';
+  }).join('')||'<p class="tiny">No entries yet. Be the first soul to sign!</p>';
+}
+renderGb();
+document.getElementById('gb-sign').addEventListener('click',function(){
+  var n=document.getElementById('gb-name').value.trim()||'Anonymous Traveler';
+  var m=document.getElementById('gb-msg').value.trim();
+  if(!m){document.getElementById('gb-msg').focus();return;}
+  entries.push({name:n,msg:m}); localStorage.setItem(KEY+'-gb',JSON.stringify(entries));
+  document.getElementById('gb-msg').value=''; renderGb();
+});
+var ringNames=['The Haunted Homestead','Pixel Palace','The Dial-Up Diner','Modem Manor','The Floppy Disk Museum','Cyber Cottage'];
+document.querySelectorAll('[data-ring]').forEach(function(b){
+  b.addEventListener('click',function(){
+    var name=ringNames[Math.floor(Math.random()*ringNames.length)];
+    document.getElementById('ring-msg').textContent='Warping to "'+name+'"… just kidding — this ring lives in your imagination (and in 1998).';
+  });
+});
+document.addEventListener('mousemove',function(e){
+  if(Math.random()<0.35){
+    var s=document.createElement('span'); s.className='sparkle'; s.textContent='✦';
+    s.style.left=(e.clientX+6)+'px'; s.style.top=(e.clientY+6)+'px';
+    document.body.appendChild(s);
+    setTimeout(function(){s.style.transition='opacity .8s'; s.style.opacity='0'; setTimeout(function(){s.remove()},800)},60);
+  }
+});
+var melody=[["C4",1],["E4",1],["G4",1],["B4",2],["A4",1],["G4",1],["E4",2],["D4",2],["C4",2],["G3",2]], freqs={"C3":131,"D3":147,"E3":165,"F3":175,"G3":196,"A3":220,"B3":247,"C4":262,"D4":294,"E4":330,"F4":349,"G4":392,"A4":440,"B4":494,"C5":523,"D5":587,"E5":659,"F5":698,"G5":784}, ctx=null, timer=null, step=0;
+document.getElementById('music-btn').addEventListener('click',function(){
+  if(timer){clearInterval(timer); timer=null; if(ctx) ctx.close(); ctx=null; this.textContent='♪ Play the chiptune'; return;}
+  ctx=new (window.AudioContext||window.webkitAudioContext)();
+  var btn=this; btn.textContent='■ Stop the music';
+  function playStep(){
+    var n=melody[step%melody.length]; step++;
+    var o=ctx.createOscillator(), g=ctx.createGain();
+    o.type='square'; o.frequency.value=freqs[n[0]]||440;
+    g.gain.setValueAtTime(0.05,ctx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.42);
+    o.connect(g); g.connect(ctx.destination); o.start(); o.stop(ctx.currentTime+0.43);
+  }
+  playStep(); timer=setInterval(playStep,430);
+});
+})();
+</script>
+</body></html>

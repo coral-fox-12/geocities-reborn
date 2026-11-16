@@ -1,0 +1,9 @@
+# .gitignore — GeoCities Reborn
+# IMPORTANT (Kiroween rules): NEVER ignore .kiro/ — the repo must contain
+# /.kiro at its root or the submission can be disqualified.
+
+node_modules/
+test/screenshots/downloaded-homepage.html
+.DS_Store
+*.log
+.env
