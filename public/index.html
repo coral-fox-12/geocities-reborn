@@ -26,14 +26,14 @@
       <button type="button" data-example="I'm DJ Nova, I mix retro synthwave and collect vinyl">🎧 DJ Nova</button>
       <button type="button" data-example="I'm Captain Stardust, an amateur astronomer hunting UFOs">🛸 Captain Stardust</button>
     </div>
-    <div class="themes" id="themes" role="radiogroup" aria-label="Neighborhood theme"></div>
+    <div class="themes" id="themes" role="group" aria-label="Neighborhood theme"></div>
     <p class="tiny" id="theme-note">No theme picked? Webby chooses the neighborhood for you.</p>
     <div class="actions">
       <button id="build-btn" class="big">✨ Build my homepage</button>
       <button id="regen-btn" class="ghost-btn" hidden>🎲 Surprise me (new version)</button>
       <button id="download-btn" class="ghost-btn" hidden>💾 Download my page (.html)</button>
     </div>
-    <p class="error" id="error" hidden></p>
+    <p class="error" id="error" role="alert" hidden></p>
     <div class="plan" id="plan" hidden>
       <h3>👻 Webby is building…</h3>
       <ol id="plan-steps"></ol>
@@ -44,7 +44,7 @@
     <div class="browser-chrome">
       <span class="dot"></span><span class="dot"></span><span class="dot"></span>
       <span class="url" id="preview-url">about:blank — your homepage will appear here</span>
-      <button id="music-btn" class="music-btn" title="Play the theme chiptune">♪</button>
+      <button id="music-btn" class="music-btn" title="Play the theme chiptune" aria-label="Play the theme chiptune">♪</button>
     </div>
     <div class="empty" id="preview-empty">
       <p class="big-emoji">🏚️</p>
@@ -70,6 +70,16 @@
 <footer>
   <p>GeoCities Reborn · Kiroween 2026 · Category: Resurrection · Made with Kiro · Best viewed at 800×600 with Netscape Navigator 4.0 (or any browser from this century)</p>
 </footer>
+<script>
+/* Static gallery fallback: the same 3 entries GET /api/gallery returns.
+   On a static host (no server) the API is absent, so app.js renders the
+   gallery from this embedded copy instead of showing "taking a nap". */
+window.GEOCITIES_GALLERY = [
+  {"file": "/samples/captain-stardust.html", "title": "Captain Stardust's Homepage 👽 Area 51", "theme": "area51", "name": "Captain Stardust"},
+  {"file": "/samples/dj-nova.html", "title": "DJ Nova's Homepage 🎸 Sunset Strip", "theme": "sunsetstrip", "name": "DJ Nova"},
+  {"file": "/samples/mimi-the-cat.html", "title": "Mimi's Homepage 🦄 Enchanted Forest", "theme": "enchantedforest", "name": "Mimi"}
+];
+</script>
 <script type="module" src="/js/app.js"></script>
 </body>
 </html>

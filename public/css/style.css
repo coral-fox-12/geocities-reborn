@@ -52,6 +52,10 @@ textarea{
   padding:10px 12px;font:inherit;font-size:16px;resize:vertical;border-radius:4px;
 }
 textarea:focus{outline:2px solid var(--accent2)}
+/* Visible keyboard focus everywhere (portal + cards + buttons). */
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{
+  outline:3px solid var(--accent2);outline-offset:2px;
+}
 .examples{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:10px 0 4px}
 .examples span{font-size:13px;opacity:.85}
 .examples button,.ghost-btn{

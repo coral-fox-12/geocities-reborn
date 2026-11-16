@@ -69,6 +69,49 @@ screenshots reviewed; one real bug fixed from visual review (names like
 3. Use Kiro's spec workflow for any further feature (e.g. the LLM upgrade):
    add a requirement, update the design, implement, test.
 
+## How this maps to the rules' "How Kiro was used" prompts
+
+The Devpost form asks judges to see, specifically: which Kiro surfaces were
+used and how they differed, custom agents, agent hooks, spec-driven
+development, steering docs, MCP, property-based testing, and Kiro powers.
+Honest status for each — nothing here is claimed that didn't happen:
+
+- **Kiro CLI (used):** installed 3.3.0 in the build sandbox; `--version` and
+  `diagnostic` verified. This is the surface that drove the build. Not
+  logged in (browser OAuth blocked in the sandbox) — see Environment.
+- **Kiro IDE / Web / Crew (not used yet):** the sandbox had no interactive
+  browser session, so no IDE or Web session ran. The spec files in
+  `.kiro/specs/` are written in Kiro's own format precisely so a real Kiro
+  IDE/Web session can pick the project up verbatim (see "What a live Kiro
+  session should still do" above). No Kiro Crew app was built — this entry
+  does not claim the Best Kiro Crew App bonus.
+- **Spec-driven development (used, the core of the build):** steering files
+  first, then `requirements.md` (8 requirements with acceptance criteria),
+  `design.md`, `tasks.md`, then implementation task-by-task, then tests.
+  Compared with vibe coding: the spec caught scope drift early (the 9th
+  section — webring — was a requirement, not a whim) and the tasks checklist
+  is what the test suite verifies against.
+- **Steering docs (used):** `product.md` (what the app is and isn't),
+  `tech.md` (zero dependencies, Node stdlib, no external URLs in output),
+  `structure.md` (repo layout). The "no external URLs in generated pages"
+  rule in `tech.md` is enforced by a test, not just a guideline.
+- **Custom agents (not used):** no custom agent was created; the build used
+  the default agent workflow with the spec files as its instructions.
+- **Agent hooks (not used):** no Kiro hooks were configured in this build.
+  The equivalent automation — re-running both test suites after every fix —
+  was done manually by the build agent, not by a hook.
+- **MCP (not used):** no MCP servers were connected; the project has zero
+  dependencies and no external services in its core path (the optional
+  Groq/Gemini proxy is plain `fetch`, not MCP).
+- **Property-based testing (not used formally):** no PBT framework was run.
+  The closest thing is the determinism invariant in `generator-test.mjs`
+  (same prompt + theme + seed ⇒ byte-identical page), checked across all 6
+  themes, plus escaping and section-coverage checks. The tests are
+  example-based, not property-based — stated plainly so judges aren't
+  misled.
+- **Kiro powers (not used):** no Kiro powers were leveraged; the build used
+  only the spec workflow, steering, and the CLI install.
+
 ## Files that prove Kiro usage
 - `.kiro/steering/product.md`, `tech.md`, `structure.md`
 - `.kiro/specs/geocities-reborn/requirements.md`, `design.md`, `tasks.md`

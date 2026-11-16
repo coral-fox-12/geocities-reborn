@@ -27,6 +27,11 @@ for (const theme of THEMES) {
     assert.ok(html.includes(theme.shrineLabel), 'shrine section label missing');
     assert.ok(!/https?:\/\//.test(html), 'external URL leaked into output');
     assert.ok(html.includes(theme.name), 'theme name missing');
+    // Accessibility: guestbook fields are labelled (not placeholder-only),
+    // and keyboard focus is visible on the generated page.
+    assert.ok(html.includes('aria-label="Your name"'), 'guestbook name input has no accessible label');
+    assert.ok(html.includes('aria-label="Your guestbook message"'), 'guestbook message input has no accessible label');
+    assert.ok(html.includes(':focus-visible'), 'generated page has no focus-visible style');
   });
 }
 

@@ -193,6 +193,7 @@ function sectionCss(theme) {
     @keyframes bob{50%{transform:translateY(-8px)}}
     input,textarea{font-family:inherit;background:#000;color:${theme.ink};border:2px inset ${theme.accent};padding:6px;width:92%}
     button{font-family:inherit;background:${theme.accent};color:#000;border:3px outset #fff;padding:6px 14px;font-weight:bold;cursor:pointer}
+    input:focus-visible,textarea:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid ${theme.accent2};outline-offset:2px}
     .counter{font-size:26px;letter-spacing:4px;color:${theme.accent2};font-family:"Courier New",monospace}
     .counter b{background:#000;border:2px solid ${theme.accent2};padding:2px 6px;margin:0 1px}
     .guest{border-bottom:1px dashed ${theme.accent2};padding:6px 0}
@@ -248,8 +249,8 @@ ${bio.map((b) => `<p>${esc(b)}</p>`).join('\n')}
 <div class="divider">${esc(theme.divider)}</div>
 <div class="box" id="guestbook"><h2>📖 Sign My Guestbook</h2>
 <div id="entries"></div>
-<p><input id="gb-name" placeholder="Your name" maxlength="40"></p>
-<p><textarea id="gb-msg" rows="3" placeholder="Leave a message from the future..." maxlength="280"></textarea></p>
+<p><input id="gb-name" aria-label="Your name" placeholder="Your name" maxlength="40"></p>
+<p><textarea id="gb-msg" aria-label="Your guestbook message" rows="3" placeholder="Leave a message from the future..." maxlength="280"></textarea></p>
 <p><button id="gb-sign">✍ Sign the guestbook</button></p></div>
 <div class="box" id="webring" style="text-align:center"><h2>🕸️ The Webring</h2>
 <p>You are visitor of the <b>${esc(theme.name)} Webring</b>.</p>

@@ -50,27 +50,29 @@ document.querySelectorAll('[data-example]').forEach((b) => {
 
 // --- Gallery -----------------------------------------------------------------
 async function loadGallery() {
+  // Prefer the server API; on a static host the API is absent, so fall back
+  // to the gallery embedded in index.html (window.GEOCITIES_GALLERY).
+  let items = null;
   try {
     const r = await fetch('/api/gallery');
-    const items = await r.json();
-    if (!items.length) { galleryCards.innerHTML = '<p class="tiny">No neighbors moved in yet.</p>'; return; }
-    galleryCards.innerHTML = '';
-    items.forEach((item) => {
-      const theme = THEMES.find((t) => t.id === item.theme) || THEMES[0];
-      const card = document.createElement('button');
-      card.className = 'card';
-      card.innerHTML = `<span class="emoji">${theme.emoji}</span><h3>${item.title}</h3><p>${theme.name} · built by Webby</p>`;
-      card.addEventListener('click', async () => {
-        const res = await fetch(item.file);
-        const html = await res.text();
-        showPage(html, item.theme, item.title);
-        document.getElementById('preview-section').scrollIntoView({ behavior: 'smooth' });
-      });
-      galleryCards.appendChild(card);
+    if (r.ok) items = await r.json();
+  } catch { /* no server — use the embedded fallback below */ }
+  if (!items || !items.length) items = window.GEOCITIES_GALLERY || null;
+  if (!items || !items.length) { galleryCards.innerHTML = '<p class="tiny">No neighbors moved in yet.</p>'; return; }
+  galleryCards.innerHTML = '';
+  items.forEach((item) => {
+    const theme = THEMES.find((t) => t.id === item.theme) || THEMES[0];
+    const card = document.createElement('button');
+    card.className = 'card';
+    card.innerHTML = `<span class="emoji">${theme.emoji}</span><h3>${item.title}</h3><p>${theme.name} · built by Webby</p>`;
+    card.addEventListener('click', async () => {
+      const res = await fetch(item.file);
+      const html = await res.text();
+      showPage(html, item.theme, item.title);
+      document.getElementById('preview-section').scrollIntoView({ behavior: 'smooth' });
     });
-  } catch {
-    galleryCards.innerHTML = '<p class="tiny">The gallery is taking a nap. Try building a page instead.</p>';
-  }
+    galleryCards.appendChild(card);
+  });
 }
 
 // --- Preview -----------------------------------------------------------------
@@ -84,6 +86,7 @@ function showPage(html, themeId, title) {
   regenBtn.hidden = false;
   downloadBtn.hidden = false;
   musicBtn.textContent = '♪';
+  musicBtn.setAttribute('aria-label', 'Play the theme chiptune');
 }
 
 // --- Generation ---------------------------------------------------------------
@@ -159,9 +162,15 @@ downloadBtn.addEventListener('click', () => {
   URL.revokeObjectURL(a.href);
 });
 musicBtn.addEventListener('click', () => {
-  if (isPlaying()) { stopMusic(); musicBtn.textContent = '♪'; return; }
+  if (isPlaying()) {
+    stopMusic();
+    musicBtn.textContent = '♪';
+    musicBtn.setAttribute('aria-label', 'Play the theme chiptune');
+    return;
+  }
   const theme = playTheme(currentThemeId || 'area51');
   musicBtn.textContent = `■ ${theme.name}`;
+  musicBtn.setAttribute('aria-label', `Stop the ${theme.name} chiptune`);
 });
 
 loadGallery();
