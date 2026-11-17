@@ -22,6 +22,11 @@ let currentHtml = '';
 let currentThemeId = null;
 let currentPrompt = '';
 let seedCounter = 0;
+// True only when a real API answered /api/gallery as JSON. On a static host
+// (Surge) a static file answers the same URL as application/octet-stream,
+// so the app knows there is no server and never probes /api/generate —
+// a probe would 404 and log a console error for nothing.
+let hasServer = false;
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -55,7 +60,10 @@ async function loadGallery() {
   let items = null;
   try {
     const r = await fetch('/api/gallery');
-    if (r.ok) items = await r.json();
+    if (r.ok) {
+      hasServer = (r.headers.get('content-type') || '').includes('application/json');
+      items = await r.json();
+    }
   } catch { /* no server — use the embedded fallback below */ }
   if (!items || !items.length) items = window.GEOCITIES_GALLERY || null;
   if (!items || !items.length) { galleryCards.innerHTML = '<p class="tiny">No neighbors moved in yet.</p>'; return; }
@@ -92,19 +100,25 @@ function showPage(html, themeId, title) {
 // --- Generation ---------------------------------------------------------------
 async function runGeneration(prompt, themeId, seed) {
   const parsed = parsePrompt(prompt);
+  // Wait for the gallery probe to settle so we know whether a real API
+  // exists; on a static host skip the /api/generate probe entirely and
+  // build locally (a POST to a static file 404s and logs a console error).
+  await galleryReady.catch(() => {});
   // Prefer the server (LLM upgrade when a key is configured); fall back to
-  // the local generator instantly if the server is unreachable.
+  // the local generator instantly if there is no server.
   let page = null;
-  try {
-    const r = await fetch('/api/generate', {
-      method: 'POST', headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ prompt, themeId }),
-    });
-    if (r.ok) {
-      const j = await r.json();
-      page = { html: j.html, theme: j.theme, plan: j.plan };
-    }
-  } catch { /* offline path below */ }
+  if (hasServer) {
+    try {
+      const r = await fetch('/api/generate', {
+        method: 'POST', headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ prompt, themeId }),
+      });
+      if (r.ok) {
+        const j = await r.json();
+        page = { html: j.html, theme: j.theme, plan: j.plan };
+      }
+    } catch { /* offline path below */ }
+  }
   if (!page) {
     const built = buildPage({ prompt, themeId, seed });
     page = { html: built.html, theme: built.theme, plan: built.plan };
@@ -122,7 +136,7 @@ async function build() {
   }
   errorEl.hidden = true;
   buildBtn.disabled = true;
-  buildBtn.textContent = '👻 Webby is building…';
+  buildBtn.textContent = 'Webby is building…';
   planEl.hidden = false;
   planStepsEl.innerHTML = '';
 
@@ -139,7 +153,7 @@ async function build() {
   currentPrompt = prompt;
   showPage(page.html, page.theme.id, parsePrompt(prompt).name + "'s Homepage");
   buildBtn.disabled = false;
-  buildBtn.textContent = '✨ Build my homepage';
+  buildBtn.textContent = 'Build my homepage';
 }
 
 buildBtn.addEventListener('click', build);
@@ -173,4 +187,4 @@ musicBtn.addEventListener('click', () => {
   musicBtn.setAttribute('aria-label', `Stop the ${theme.name} chiptune`);
 });
 
-loadGallery();
+const galleryReady = loadGallery();

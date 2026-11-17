@@ -3,66 +3,95 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GeoCities Reborn 👻 — The dead web lives again</title>
+<title>GeoCities Reborn — The dead web lives again</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20fill='%23ff4d2e'/%3E%3Ctext%20x='32'%20y='45'%20font-family='Arial%20Black'%20font-size='36'%20font-weight='900'%20text-anchor='middle'%20fill='%23171310'%3EG%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<div class="stars" aria-hidden="true"></div>
-<header class="hero">
-  <div class="badges"><span class="badge blink">UNDER CONSTRUCTION</span><span class="badge">EST. 1994 — REBORN 2026</span><span class="badge">100% HANDMADE HTML</span></div>
-  <h1><span class="ghost">👻</span> GeoCities <span class="reborn">Reborn</span></h1>
-  <p class="tagline">The dead web lives again. Tell <b>Webby</b>, our ghost-agent, one sentence about yourself — and watch it build you a 1990s personal homepage, visitor counter and all.</p>
-  <p class="tiny">Built with Kiro for Kiroween 2026 · Category: Resurrection · No accounts, no tracking, no cookies. The 90s way.</p>
+<header class="masthead">
+  <div class="masthead-top">
+    <p class="kicker">EST. 1994 — REBORN 2026</p>
+    <p class="kicker">KIROWEEN 2026 · CATEGORY: RESURRECTION</p>
+  </div>
+  <div class="masthead-grid">
+    <div class="masthead-main">
+      <h1>GeoCities<br><span class="reborn">Reborn</span></h1>
+      <p class="tagline">The dead web lives again. Tell <b>Webby</b>, our ghost-agent, one sentence about yourself — and watch it build you a 1990s personal homepage, visitor counter and all.</p>
+    </div>
+    <nav class="street" aria-label="Neighborhoods on this street">
+      <p class="street-title">ON THIS STREET</p>
+      <ol>
+        <li><span>01</span> Area 51</li>
+        <li><span>02</span> Hollywood</li>
+        <li><span>03</span> Sunset Strip</li>
+        <li><span>04</span> Heartland</li>
+        <li><span>05</span> Enchanted Forest</li>
+        <li><span>06</span> Silicon Valley</li>
+      </ol>
+      <p class="street-note">Six neighborhoods. Pick one, or let Webby choose for you.</p>
+    </nav>
+  </div>
+  <div class="dateline">
+    <p>No accounts. No tracking. No cookies. — The 90s way.</p>
+    <p>Built with Kiro · Kiroween 2026</p>
+  </div>
 </header>
 
 <main>
   <section class="panel builder" id="builder">
-    <h2>🕸️ Build your homepage</h2>
-    <label for="prompt">One sentence about you. Who are you, and what do you love?</label>
+    <p class="kicker"><span>01</span> Build your homepage</p>
+    <h2>One sentence is all it takes</h2>
+    <label for="prompt">Who are you, and what do you love?</label>
     <textarea id="prompt" rows="2" maxlength="300" placeholder="e.g. I'm Mimi, a cat who rules the house and worships sunbeams"></textarea>
     <div class="examples">
       <span>Try one:</span>
-      <button type="button" data-example="I'm Mimi, a cat who rules the house and worships sunbeams">🐱 Mimi the cat</button>
-      <button type="button" data-example="I'm DJ Nova, I mix retro synthwave and collect vinyl">🎧 DJ Nova</button>
-      <button type="button" data-example="I'm Captain Stardust, an amateur astronomer hunting UFOs">🛸 Captain Stardust</button>
+      <button type="button" data-example="I'm Mimi, a cat who rules the house and worships sunbeams">Mimi the cat</button>
+      <button type="button" data-example="I'm DJ Nova, I mix retro synthwave and collect vinyl">DJ Nova</button>
+      <button type="button" data-example="I'm Captain Stardust, an amateur astronomer hunting UFOs">Captain Stardust</button>
     </div>
     <div class="themes" id="themes" role="group" aria-label="Neighborhood theme"></div>
     <p class="tiny" id="theme-note">No theme picked? Webby chooses the neighborhood for you.</p>
     <div class="actions">
-      <button id="build-btn" class="big">✨ Build my homepage</button>
-      <button id="regen-btn" class="ghost-btn" hidden>🎲 Surprise me (new version)</button>
-      <button id="download-btn" class="ghost-btn" hidden>💾 Download my page (.html)</button>
+      <button id="build-btn" class="big">Build my homepage</button>
+      <button id="regen-btn" class="ghost-btn" hidden>Surprise me (new version)</button>
+      <button id="download-btn" class="ghost-btn" hidden>Download my page (.html)</button>
     </div>
     <p class="error" id="error" role="alert" hidden></p>
     <div class="plan" id="plan" hidden>
-      <h3>👻 Webby is building…</h3>
+      <h3>Webby is building…</h3>
       <ol id="plan-steps"></ol>
     </div>
   </section>
 
   <section class="panel preview" id="preview-section">
+    <p class="kicker"><span>02</span> Your lot</p>
+    <h2>The page, before it moves in</h2>
     <div class="browser-chrome">
       <span class="dot"></span><span class="dot"></span><span class="dot"></span>
       <span class="url" id="preview-url">about:blank — your homepage will appear here</span>
       <button id="music-btn" class="music-btn" title="Play the theme chiptune" aria-label="Play the theme chiptune">♪</button>
     </div>
     <div class="empty" id="preview-empty">
-      <p class="big-emoji">🏚️</p>
+      <p class="vacant">Vacant lot</p>
       <p>This lot is empty. Build a homepage above — or peek at a neighbor below.</p>
     </div>
     <iframe id="preview" title="Your generated homepage" hidden></iframe>
   </section>
 
   <section class="panel gallery" id="gallery">
-    <h2>🏘️ The neighborhood — sample homepages</h2>
+    <p class="kicker"><span>03</span> The neighborhood</p>
+    <h2>Sample homepages</h2>
     <p>Every page below was built by Webby itself. Click one to move in for a look.</p>
     <div class="cards" id="gallery-cards"><p class="tiny">Loading the neighbors…</p></div>
   </section>
 
   <section class="panel about">
-    <h2>🪦 What died, and what came back</h2>
-    <p>GeoCities hosted <b>38 million</b> personal homepages and shut down in 2009. The web lost its front yards: pages built by hand, by ordinary people, for no reason except joy. <b>GeoCities Reborn</b> brings them back — the tiled backgrounds, the guestbooks, the visitor counters, the under-construction signs — rebuilt by an AI agent that plans, drafts, and verifies each page like a tiny 1998 webmaster who never sleeps.</p>
-    <p>Everything runs locally, with zero dependencies. A generated page is a single HTML file: no tracking, no external images, no server needed. Download it and it works forever, offline, on any machine — the way the old web was supposed to work.</p>
+    <p class="kicker"><span>04</span> The eulogy</p>
+    <h2>What died, and what came back</h2>
+    <div class="about-cols">
+      <p>GeoCities hosted <b>38 million</b> personal homepages and shut down in 2009. The web lost its front yards: pages built by hand, by ordinary people, for no reason except joy. <b>GeoCities Reborn</b> brings them back — the tiled backgrounds, the guestbooks, the visitor counters, the under-construction signs — rebuilt by an AI agent that plans, drafts, and verifies each page like a tiny 1998 webmaster who never sleeps.</p>
+      <p>Everything runs locally, with zero dependencies. A generated page is a single HTML file: no tracking, no external images, no server needed. Download it and it works forever, offline, on any machine — the way the old web was supposed to work.</p>
+    </div>
     <p class="tiny">How it was built: spec-driven with Kiro — see <code>.kiro/specs/geocities-reborn/</code> for requirements, design, and tasks, and <code>KIRO-USAGE.md</code> for every Kiro session. Kiro CLI 3.3.0 installed in the build environment.</p>
   </section>
 </main>
@@ -75,9 +104,9 @@
    On a static host (no server) the API is absent, so app.js renders the
    gallery from this embedded copy instead of showing "taking a nap". */
 window.GEOCITIES_GALLERY = [
-  {"file": "/samples/captain-stardust.html", "title": "Captain Stardust's Homepage 👽 Area 51", "theme": "area51", "name": "Captain Stardust"},
-  {"file": "/samples/dj-nova.html", "title": "DJ Nova's Homepage 🎸 Sunset Strip", "theme": "sunsetstrip", "name": "DJ Nova"},
-  {"file": "/samples/mimi-the-cat.html", "title": "Mimi's Homepage 🦄 Enchanted Forest", "theme": "enchantedforest", "name": "Mimi"}
+  {"file": "/samples/captain-stardust.html", "title": "Captain Stardust's Homepage — Area 51", "theme": "area51", "name": "Captain Stardust"},
+  {"file": "/samples/dj-nova.html", "title": "DJ Nova's Homepage — Sunset Strip", "theme": "sunsetstrip", "name": "DJ Nova"},
+  {"file": "/samples/mimi-the-cat.html", "title": "Mimi's Homepage — Enchanted Forest", "theme": "enchantedforest", "name": "Mimi"}
 ];
 </script>
 <script type="module" src="/js/app.js"></script>

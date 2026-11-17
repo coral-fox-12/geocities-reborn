@@ -3,6 +3,7 @@
 # /.kiro at its root or the submission can be disqualified.
 
 node_modules/
+redesign/node_modules/
 .wrangler/
 .dev.vars
 test/screenshots/downloaded-homepage.html

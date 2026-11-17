@@ -10,9 +10,9 @@ import { buildPage } from './public/js/generator.js';
 // (meta "geocities" tags). Workers have no filesystem, so the list is
 // embedded here; update it if a sample is added or renamed.
 const GALLERY = [
-  { file: '/samples/captain-stardust.html', title: "Captain Stardust's Homepage 👽 Area 51", theme: 'area51', name: 'Captain Stardust' },
-  { file: '/samples/dj-nova.html', title: "DJ Nova's Homepage 🎸 Sunset Strip", theme: 'sunsetstrip', name: 'DJ Nova' },
-  { file: '/samples/mimi-the-cat.html', title: "Mimi's Homepage 🦄 Enchanted Forest", theme: 'enchantedforest', name: 'Mimi' },
+  { file: '/samples/captain-stardust.html', title: "Captain Stardust's Homepage — Area 51", theme: 'area51', name: 'Captain Stardust' },
+  { file: '/samples/dj-nova.html', title: "DJ Nova's Homepage — Sunset Strip", theme: 'sunsetstrip', name: 'DJ Nova' },
+  { file: '/samples/mimi-the-cat.html', title: "Mimi's Homepage — Enchanted Forest", theme: 'enchantedforest', name: 'Mimi' },
 ];
 
 function json(data, status = 200) {
