@@ -1,14 +1,42 @@
-// Headless end-to-end check for GeoCities Reborn (Playwright).
-// Run: node test/headless-check.mjs
-// Spawns the server itself, checks the full flow, takes screenshots.
-import { chromium } from '/tmp/shot/node_modules/playwright/index.mjs';
+// Playwright is resolved portably: repo node_modules first, then any npx
+// cache install, then the legacy /tmp path. (A live Kiro session found the
+// old hardcoded /tmp path broken; the npx-cache hash path it first used
+// was machine-specific, so this resolver tries candidates in order.)
+import { createRequire } from 'node:module';
 import { spawn } from 'node:child_process';
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, '..');
+
+async function loadPlaywright() {
+  const candidates = [path.join(ROOT, 'node_modules', 'playwright', 'index.mjs')];
+  try {
+    const npxRoot = path.join(os.homedir(), '.npm', '_npx');
+    for (const d of fs.readdirSync(npxRoot))
+      candidates.push(path.join(npxRoot, d, 'node_modules', 'playwright', 'index.mjs'));
+  } catch {}
+  candidates.push('/tmp/shot/node_modules/playwright/index.mjs');
+  const tried = [];
+  for (const c of candidates) {
+    try {
+      if (!fs.existsSync(c)) continue;
+      const mod = await import(c);
+      // Probe: an install is only usable if its browser binary is present.
+      const browser = await mod.chromium.launch({ headless: true });
+      await browser.close();
+      return mod;
+    } catch (e) {
+      tried.push(c + ' (' + String(e.message || e).split('\n')[0] + ')');
+    }
+  }
+  throw new Error('No working Playwright found. Tried:\n' + tried.join('\n') + '\nFix: npx playwright@1.49.1 install chromium, then retry.');
+}
+
+const { chromium } = await loadPlaywright();
 const SHOTS = path.join(ROOT, 'test', 'screenshots');
 fs.mkdirSync(SHOTS, { recursive: true });
 
